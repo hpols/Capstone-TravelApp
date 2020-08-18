@@ -7,18 +7,18 @@
 	<script type="text/javascript" src="http://api.geonames.org/export/geonamesData.js?username=atschpe"></script>
 </head>
 	
-<body onload="Client.setDefaultCountry();">
+<body onload="Client.populateCountrySelector();">
 
 	<form name="myform">
 
-		<table>
+		<table id="app">
 
 			<tbody>
 				<tr>
 				<td>Country</td>
 					<td colspan="2">
 						<select id="countrySelect" name="country">
-						<option value="AD"> Andorra</option>
+						<!--<option value="AD"> Andorra</option>
 						<option value="AE"> United Arab Emirates</option>
 						<option value="AF"> Afghanistan</option>
 						<option value="AG"> Antigua and Barbuda</option>
@@ -257,7 +257,7 @@
 						<option value="YT"> Mayotte</option>
 						<option value="ZA"> South Africa</option>
 						<option value="ZM"> Zambia</option>
-						<option value="ZW"> Zimbabwe</option>
+						<option value="ZW"> Zimbabwe</option>-->
 						</select>
 					</td>
 				</tr>
@@ -291,28 +291,6 @@
 		</table>
 	</form>
 </body>
-<!--<body onLoad="Client.setDefaultCountry()" data-gr-c-s loaded="true">
-	<div id = "app">
-		<h1>Travel App</h1>
-		<form onsubmit="Client.formSubmit(event)">
-			<div class ="holder country">
-				<label for="country">Country: </label>
-				<select id="selectCountry" name="country"></select> will be autopopulated 
-			</div>
-			<div class ="holder ctiy">
-				<label for="city">Postcode &amp; City: </label>
-				<input type="text" id="postalcodeInput#" onblur="Client.postalCodeLookup()">
-				<input type="text" id="placeInput#" onblue="Client.closeSugesstBox()">
-			</div>
-			<input type="submit" name="" value="submit" onclick="return Client.formSubmit(event)" onsubmit="return formSubmit(event)">
-			<div class ="holder entry">
-				<div class = "title">Coordinates</div>
-				<label for="lat">Latitude: </label><input type="text" name="lat">
-				<label for="long">Longitude: </label><input type="text" name="long">
-			</div>
-		</form>
-	</div>
-</body>-->
 	<footer>
 	<div>with thanks to <a href="http://www.geonames.org">GeoNames</a></div>
 	</footer>

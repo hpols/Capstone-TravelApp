@@ -2,69 +2,9 @@
 
 // postalcodes is filled by the JSON callback and used by the mouse event handlers of the suggest box
 var postalcodes;
+const placeInput = document.getElementById("placeInput"); 
 const suggestionBox = document.getElementById('suggestBoxElement');
-
-// this function will be called by our JSON callback
-// the parameter receivedData will contain an array with postalcode objects
-function getLocation(receivedData) {
-	console.log(receivedData)
-  if (receivedData == null) {
-    return;// There was a problem parsing search results
-  }
-
-  // save place array in 'postalcodes' to make it accessible from mouse event handlers
-  postalcodes = receivedData.postalcodes;
-	console.log(postalcodes)
-    	
-  if (postalcodes.length > 1) {
-    // we got several places for the postalcode
-    // make suggest box visible
-    document.getElementById('suggestBoxElement').style.visibility = 'visible';
-    var suggestBoxHTML  = '';
-    // iterate over places and build suggest box content
-	  let id = 0;
-	  for(const postcode of postcodes) {
-		// for every postalcode record we create a html div with incremental id for later retrieval 
-      	// define mouse event handlers to highlight places on mouseover and to select a place on click
-		  suggestBoxHTML += "<div class='suggestions' id=pcId" + id + " onmousedown='Client.suggestBoxMouseDown(" + id +")' onmouseover='Client.suggestBoxMouseOver(" +  id +")' onmouseout='Client.suggestBoxMouseOut(" + id +")'> " + postalcode.countryCode + ' ' + postalcode.postalcode + '    ' + postalcode.placeName  +'</div>';
-		 
-		  id++
-	  }
-    // display suggest box
-    suggestionBox.innerHTML = suggestBoxHTML;
-  } else {
-    if (postalcodes.length == 1) {
-      // exactly one place for postalcode
-      // directly fill the form, no suggest box required 
-      var placeInput = document.getElementById("placeInput");
-      placeInput.value = postalcodes[0].placeName;
-    }
-    closeSuggestBox();
-  }
-}
-
-function closeSuggestBox() {
-	suggestionBox.innerHTML = '';
-  	suggestionBox.style.visibility = 'hidden';
-}
-
-// remove highlight on mouse out event
-function suggestBoxMouseOut(obj) {
-  document.getElementById('pcId'+ obj).className = 'suggestions';
-}
-
-// the user has selected a place name from the suggest box
-function suggestBoxMouseDown(obj) {
-  closeSuggestBox();
-  var placeInput = document.getElementById("placeInput");
-  placeInput.value = postalcodes[obj].placeName;
-}
-
-// function to highlight places on mouse over event
-function suggestBoxMouseOver(obj) {
-  document.getElementById('pcId'+ obj).className = 'suggestionMouseOver';
-}
-
+const countrySelectors = document.getElementById("countrySelect");
 
 // Once the user leaves the postal code input field this function is called to retrieve an array of places from geonames.org JSON
 // for the given postal code 
@@ -85,7 +25,68 @@ function postalCodeLookup() {
   var request = 'http://api.geonames.org/postalCodeLookupJSON?postalcode=' + postalcode + '&country=' + country + '&username=atschpe';
 	
 	retrieveData(request)
-	.then(getLocation(data));
+	.then(function(receivedData) {
+  if (receivedData == null) {
+    return;// There was a problem parsing search results
+  }
+
+  // save place array in 'postalcodes' to make it accessible from mouse event handlers
+  postalcodes = receivedData.postalcodes;
+    	
+  if (postalcodes.length > 1) {
+    // Make suggestion box visible and display the options
+    document.getElementById('suggestBoxElement').style.visibility = 'visible';
+    var suggestBoxHTML  = '';
+    // iterate over places and build suggest box content
+	  let id = 0;
+	  for(const postalcode of postalcodes) {
+		// for every postalcode record we create a html div with incremental id for later retrieval 
+      	// define mouse event handlers to highlight places on mouseover and to select a place on click
+		  suggestBoxHTML += "<div class='suggestions' id=pcId" + id + " onmousedown='Client.suggestBoxMouseDown(" + id +")' onmouseover='Client.suggestBoxMouseOver(" +  id +")' onmouseout='Client.suggestBoxMouseOut(" + id +")'> " + postalcode.countryCode + ' ' + postalcode.postalcode + '    ' + postalcode.placeName  +'</div>';
+		 
+		  id++
+	  }
+    // display suggest box
+    suggestionBox.innerHTML = suggestBoxHTML;
+  } else {
+    if (postalcodes.length == 1) {
+      // The postalcode only refers to one place so directly fill the form 
+      placeInput.value = postalcodes[0].placeName;
+		setLongLat(postalcodes);
+    }
+      closeSuggestBox();
+	  
+  }
+	});
+}
+
+function closeSuggestBox() {
+	suggestionBox.innerHTML = '';
+  	suggestionBox.style.visibility = 'hidden';
+}
+
+function setLongLat(postalcodeData) {
+	console.log(postalcodeData[0].lat);
+	document.getElementById('latitude').value = postalcodeData[0].lat;
+	document.getElementById('longitude').value = postalcodeData[0].lng;	
+}
+
+// remove highlight on mouse out event
+function suggestBoxMouseOut(obj) {
+	if (obj != "") {
+		document.getElementById('pcId'+ obj).className = 'suggestions';
+	}
+}
+
+// the user has selected a place name from the suggest box
+function suggestBoxMouseDown(obj) {
+  closeSuggestBox();
+  placeInput.value = postalcodes[obj].placeName;
+}
+
+// function to highlight places on mouse over event
+function suggestBoxMouseOver(obj) {
+  document.getElementById('pcId'+ obj).className = 'suggestionMouseOver';
 }
 
 //ASYNC get from API
@@ -105,19 +106,33 @@ const retrieveData = async (url= ' ') => {
 // set the country of the user's ip (included in geonamesData.js) as selected country 
 // in the country select box of the address form
 function setDefaultCountry() {
-  var countrySelect = document.getElementById("countrySelect");
-  for (var i=0;i< countrySelect.length;i++) {
+  for (const countrySelector of countrySelectors) {
     // the javascript geonamesData.js contains the countrycode
     // of the userIp in the variable 'geonamesUserIpCountryCode'
-    if (countrySelect[i].value == geonamesUserIpCountryCode) {
+    if (countrySelector.value == geonamesUserIpCountryCode) {
       // set the country selectionfield
-      countrySelect.selectedIndex = i;
+      countrySelectors.selectedIndex = i;
     }
   }
 }
 
+function populateCountrySelector() {
+	retrieveData('http://api.geonames.org/countryInfoJSON?username=atschpe')	
+	.then(function (countries){
+		if(countries == null) {
+			return; //something went wrong
+		}
+		console.log(countries)
+		for (const country of countries) {
+			countrySelectors.innerHTML += '<option value> ="' + country.countryCode + '>' + country.countryName + '</option>';
+		}
+					 
+	}).then(setDefaultCountry());
+}
+
 export {
 	setDefaultCountry,
+	populateCountrySelector,
 	postalCodeLookup,
 	suggestBoxMouseDown,
 	suggestBoxMouseOut,
