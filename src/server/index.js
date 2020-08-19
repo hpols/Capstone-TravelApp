@@ -65,8 +65,9 @@ function addData(req, res){
 	newData.push(req.body);
 }
 
-// https://api.weatherbit.io/v2.0/forecast/daily?&lat=38.123&lon=-78.543&key=058d2a3f87d2492c84a485f55f8b7e22
-const baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily';
+// https://api.weatherbit.io/v2.0/forecast/daily&lat=47.891024843906955&lon=7.6554107666015625&key=058d2a3f87d2492c84a485f55f8b7e22
+// https://api.weatherbit.io/v2.0/forecast/daily?&lat=38.123&lon=-78.543&key=API_KEY
+const baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?';
 const latHolder = '&lat=';
 const longHolder = '&lon=';
 const keyHolder = '&key=';

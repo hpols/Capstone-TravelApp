@@ -6,18 +6,17 @@ const dayFactor = (hourFactor * 24);
 
 const counter = document.getElementById('counter');
 let travelDate = '';
+let dateInput = '';
 let dayValue, hourValue, minuteValue, secondValue;
 
 function startCounter() {
-	let dateInput = document.getElementById('traveldate').value;
+	dateInput = document.getElementById('traveldate').value;
 
-	console.log("dateinput: " + dateInput)
+	console.log("dateInput: " + dateInput)
 	if(dateInput != "" && dateInput != "yyyy-mm-dd") {
 		
 		travelDate = new Date(dateInput).getTime();
-		console.log("travelDate: " + travelDate)
 		
-		counter.style.visibility = 'visible';
 		countdown();
 	} 
 }
@@ -49,5 +48,5 @@ function countdown() {
 export {
 	startCounter,
 	dayValue,
-	travelDate
+	dateInput
 }

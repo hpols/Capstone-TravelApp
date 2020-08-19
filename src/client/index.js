@@ -10,7 +10,7 @@ import { getLocation,
 	   lat, long} from './js/geo.js'
 import { startCounter,
 	   dayValue,
-	   travelDate} from './js/counter.js'
+	   dateInput} from './js/counter.js'
 import {getWeather} from './js/weather.js'
 
 import './styles/style.scss'
@@ -28,7 +28,7 @@ export {
 	
 	startCounter,
 	dayValue,
-	travelDate,
+	dateInput,
 	
 	getWeather
 }

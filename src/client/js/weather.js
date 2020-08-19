@@ -8,20 +8,19 @@ function getWeather() {
 		weatherInfo.innerHTML = "It's too early. The weather Gods haven't decided yet."
 	} else {
 		weatherInfo.innerHTML = "The weather Gods are cooking up your forecast."
-		console.log("Your latitude: "+ Client.lat + ", and your longitude: " + Client.long)
+		
 		callWeather('http://localhost:8000/weather', {
 			lat: Client.lat,
 			long: Client.long
 		})
 		.then(function(res){
 			console.log(res);
-			/*let neededData;
-			for(entry of res){
-				if (entry.data.valid_date == Client.travelDate){
-					neededData = entry;
-				}	
-			}
-			document.weatherInfo.textContent = neededData.weather.description;*/
+			let weatherToDisplay = res.data.filter(function(e){
+				e.valid_date >= Client.dateInput;
+			});
+			
+			console.log(weatherToDisplay);
+			//document.weatherInfo.textContent = weatherToDisplay.weather.description;
 		})
 	}
 }
