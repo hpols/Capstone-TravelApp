@@ -6,6 +6,7 @@ const dayFactor = (hourFactor * 24);
 
 const counter = document.getElementById('counter');
 let travelDate = '';
+let dayValue, hourValue, minuteValue, secondValue;
 
 function startCounter() {
 	let dateInput = document.getElementById('traveldate').value;
@@ -27,10 +28,10 @@ function countdown() {
 	var timeLeft = travelDate - now; //how much time is left before the travel date?
 
   	// Time calculations for days, hours, minutes and seconds
-	var dayValue = Math.floor(timeLeft / dayFactor);
-	var hourValue = Math.floor((timeLeft % dayFactor) / hourFactor);
-	var minuteValue = Math.floor((timeLeft % hourFactor) / minFactor);
-  	var secondValue = Math.floor((timeLeft % minFactor) / secFactor);
+	dayValue = Math.floor(timeLeft / dayFactor);
+	hourValue = Math.floor((timeLeft % dayFactor) / hourFactor);
+	minuteValue = Math.floor((timeLeft % hourFactor) / minFactor);
+  	secondValue = Math.floor((timeLeft % minFactor) / secFactor);
 
   // Display the result in the element with id="counter"
   counter.innerHTML = dayValue + "d " + hourValue + "h "
@@ -46,5 +47,7 @@ function countdown() {
 // JavaScript Document
 
 export {
-startCounter
+	startCounter,
+	dayValue,
+	travelDate
 }

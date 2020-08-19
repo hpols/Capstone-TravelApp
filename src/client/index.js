@@ -1,5 +1,4 @@
 //imports
-import { formSubmit} from './js/app.js'
 import { getLocation,
 		populateCountrySelector,
 		setDefaultCountry, 
@@ -7,13 +6,17 @@ import { getLocation,
 		closeSuggestBox,
 		suggestBoxMouseDown,
 		suggestBoxMouseOut,
-		suggestBoxMouseOver, } from './js/geo.js'
-import { startCounter} from './js/counter.js'
+		suggestBoxMouseOver,
+	   lat, long} from './js/geo.js'
+import { startCounter,
+	   dayValue,
+	   travelDate} from './js/counter.js'
+import {getWeather} from './js/weather.js'
+
 import './styles/style.scss'
 
 //exports
 export {
-	formSubmit, 
 	populateCountrySelector,
 	setDefaultCountry, 
 	postalCodeLookup, 
@@ -21,5 +24,11 @@ export {
 	suggestBoxMouseDown,
 	suggestBoxMouseOut,
 	suggestBoxMouseOver,
-	startCounter
+	lat, long,
+	
+	startCounter,
+	dayValue,
+	travelDate,
+	
+	getWeather
 }

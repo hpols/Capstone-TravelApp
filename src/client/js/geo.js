@@ -6,15 +6,17 @@ const placeInput = document.getElementById("placeInput");
 const suggestionBox = document.getElementById('suggestBoxElement');
 const countrySelectors = document.getElementById("countrySelect");
 
+let lat, long;
+
 // Once the user leaves the postal code input field this function is called to retrieve an array of places from geonames.org JSON
 // for the given postal code 
 function postalCodeLookup() {
 
   var country = document.getElementById("countrySelect").value;
 
-  if (geonamesPostalCodeCountries.toString().search(country) == -1) {
-     return; // selected country not supported by geonames
-  }
+//  if (geonamesPostalCodeCountries.toString().search(country) == -1) {
+//     return; // selected country not supported by geonames
+//  }
   // display 'loading' in suggest box
   suggestionBox.style.visibility = 'visible';
   suggestionBox.innerHTML = '<small><i>loading ...</i></small>';
@@ -66,9 +68,10 @@ function closeSuggestBox() {
 }
 
 function setLongLat(postalcodeData) {
-	console.log(postalcodeData[0].lat);
-	document.getElementById('latitude').value = postalcodeData[0].lat;
-	document.getElementById('longitude').value = postalcodeData[0].lng;	
+	lat = postalcodeData[0].lat; //populate the variables so the data can be retrieved
+	long = postalcodeData[0].lng;
+	document.getElementById('latitude').value = lat;
+	document.getElementById('longitude').value = long;	
 }
 
 // remove highlight on mouse out event
@@ -138,5 +141,6 @@ export {
 	suggestBoxMouseDown,
 	suggestBoxMouseOut,
 	suggestBoxMouseOver,
-	closeSuggestBox
+	closeSuggestBox,
+	lat, long
 }
