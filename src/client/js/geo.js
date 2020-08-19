@@ -42,7 +42,7 @@ function postalCodeLookup() {
 	  for(const postalcode of postalcodes) {
 		// for every postalcode record we create a html div with incremental id for later retrieval 
       	// define mouse event handlers to highlight places on mouseover and to select a place on click
-		  suggestBoxHTML += "<div class='suggestions' id=pcId" + id + " onmousedown='Client.suggestBoxMouseDown(" + id +")' onmouseover='Client.suggestBoxMouseOver(" +  id +")' onmouseout='Client.suggestBoxMouseOut(" + id +")'> " + postalcode.countryCode + ' ' + postalcode.postalcode + '    ' + postalcode.placeName  +'</div>';
+		  suggestBoxHTML += `<div class='suggestions' id='pcId${id}' onmousedown='Client.suggestBoxMouseDown("${id}")' onmouseover='Client.suggestBoxMouseOver("${id}")' onmouseout='Client.suggestBoxMouseOut("${id}")'> ${postalcode.countryCode} ${postalcode.postalcode}   ${postalcode.placeName }</div>`;
 		 
 		  id++
 	  }
@@ -102,7 +102,6 @@ const retrieveData = async (url= ' ') => {
 	}
 }
 
-
 // set the country of the user's ip (included in geonamesData.js) as selected country 
 // in the country select box of the address form
 function setDefaultCountry() {
@@ -117,14 +116,16 @@ function setDefaultCountry() {
 }
 
 function populateCountrySelector() {
+	console.log("polpulate Selector called")
 	retrieveData('http://api.geonames.org/countryInfoJSON?username=atschpe')	
 	.then(function (countries){
 		if(countries == null) {
 			return; //something went wrong
 		}
 		console.log(countries)
-		for (const country of countries) {
-			countrySelectors.innerHTML += '<option value> ="' + country.countryCode + '>' + country.countryName + '</option>';
+		for (const country of countries.geonames) {
+			//example: <option value="AE"> United Arab Emirates</option>
+			countrySelectors.innerHTML += `<option value="${country.countryCode}"> ${country.countryName}</option>`;
 		}
 					 
 	}).then(setDefaultCountry());

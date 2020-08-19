@@ -8,6 +8,7 @@ import { getLocation,
 		suggestBoxMouseDown,
 		suggestBoxMouseOut,
 		suggestBoxMouseOver, } from './js/geo.js'
+import { startCounter} from './js/counter.js'
 import './styles/style.scss'
 
 //exports
@@ -20,4 +21,5 @@ export {
 	suggestBoxMouseDown,
 	suggestBoxMouseOut,
 	suggestBoxMouseOver,
+	startCounter
 }
