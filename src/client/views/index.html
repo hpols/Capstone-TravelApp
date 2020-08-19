@@ -8,15 +8,23 @@
 	
 <body onload="Client.populateCountrySelector();">
 	<div id="app">
+		
+		<!--Make sure the form has the autocomplete function switched off:-->
+<form autocomplete="off" action="/action_page.php">
+  <div class="autocomplete" style="width:300px;">
+    <input id="myInput" type="text" name="myCountry" placeholder="Country">
+  </div>
+</form>
+		
 	<form name="home">
 		<label for="country">Country</label>
-		<select id="countrySelect" name="country"><!--Will be autopopulated --></select>
+		<select id="countrySelect" name="country">
+			<option disabled selected value="">-- Please select Country --</option>
+			<!--Will be autopopulated --></select>
 		<label for="postalcode">PostalCode / Place</label>
 		<input id="postalcodeInput" name="postalcode" onblur="Client.postalCodeLookup();" size="10" type="text">
-		<div>
 			<input id="placeInput" name="place" size="30" onblur="Client.closeSuggestBox();" type="text">
 			<div style="visibility: hidden;" id="suggestBoxElement"><!--Will auto populate --></div>
-		</div>
 		<label for="lat">Latitude:</label>
 		<input id="latitude" name="lat" size="12" type="text">
 		<label for="long">Longitude:</label>
@@ -35,6 +43,6 @@
 	</div>
 		</body>
 	<footer>
-	<div>with thanks to <a href="http://www.geonames.org">GeoNames</a></div>
+	<div>With thanks to <a href="http://www.geonames.org">GeoNames</a></div>
 	</footer>
 </html>

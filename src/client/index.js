@@ -1,5 +1,6 @@
 //imports
 import { getLocation,
+		autocomplete,
 		populateCountrySelector,
 		setDefaultCountry, 
 		postalCodeLookup, 
@@ -17,6 +18,7 @@ import './styles/style.scss'
 
 //exports
 export {
+	autocomplete,
 	populateCountrySelector,
 	setDefaultCountry, 
 	postalCodeLookup, 
