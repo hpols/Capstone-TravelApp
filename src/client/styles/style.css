@@ -98,6 +98,11 @@ input:read-only {
   flex-direction: row;
   flex-wrap: wrap; }
 
+#weather-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
 * {
   box-sizing: border-box; }
 
@@ -131,3 +136,8 @@ input:read-only {
 .autocomplete-active {
   background-color: DodgerBlue !important;
   color: #ffffff; }
+
+#weather-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }

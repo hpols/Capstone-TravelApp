@@ -108,6 +108,14 @@ input:read-only {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	  background: #3333ff; color: white;  
+}
+
+#weather-info {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	  background: #3333ff; color: white;  
 }
 
 * {
@@ -148,4 +156,9 @@ input:read-only {
 .autocomplete-active {
   background-color: DodgerBlue !important; 
   color: #ffffff; 
+
+#weather-info {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
