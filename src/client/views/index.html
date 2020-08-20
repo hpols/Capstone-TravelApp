@@ -6,21 +6,20 @@
 	<link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
 </head>
 	
-<body onload="Client.populateCountrySelector();">
+<body>
 	<div id="app">
-	<form name="home">
-		<label for="country">Country</label>
-		<select id="countrySelect" name="country"><!--Will be autopopulated --></select>
-		<label for="postalcode">PostalCode / Place</label>
-		<input id="postalcodeInput" name="postalcode" onblur="Client.postalCodeLookup();" size="10" type="text">
-		<div>
-			<input id="placeInput" name="place" size="30" onblur="Client.closeSuggestBox();" type="text">
-			<div style="visibility: hidden;" id="suggestBoxElement"><!--Will auto populate --></div>
-		</div>
-		<label for="lat">Latitude:</label>
-		<input id="latitude" name="lat" size="12" type="text">
-		<label for="long">Longitude:</label>
-		<input id="longitude" name="long" size="12" type="text">
+		
+	<form name="home" autocomplete="off" action="/action_page.php"> <!-- auto complete set on the div itself -->
+		 <div class="autocomplete">
+    <input id="myInput" type="text" name="myCountry" placeholder="Country">
+  </div>
+		<div id="code-city">
+			<input id="postalcodeInput" name="postalcode" onblur="Client.postalCodeLookup();" type="text" placeholder="postal code">
+			<input id="placeInput" name="place" onblur="Client.closeCityBox();" type="text" placeholder="place" readonly>
+			<div style="visibility: hidden;" id="cityBoxElement"><!--Will auto populate --></div>
+			</div>
+		<input id="latitude" name="lat" size="12" type="text" placeholder="Latitude" readonly>
+		<input id="longitude" name="long" size="12" type="text" placeholder="Longitude" readonly>
 	</form>
 		<div id="countdown">
 		<label for="date">Traveldate: </label>
@@ -36,6 +35,6 @@
 	</div>
 		</body>
 	<footer>
-	<div>with thanks to <a href="http://www.geonames.org">GeoNames</a></div>
+	<div>With thanks to <a href="http://www.geonames.org">GeoNames</a></div>
 	</footer>
 </html>

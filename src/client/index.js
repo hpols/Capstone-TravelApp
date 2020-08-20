@@ -1,12 +1,10 @@
 //imports
-import { getLocation,
-		populateCountrySelector,
-		setDefaultCountry, 
+import { autocomplete,
 		postalCodeLookup, 
-		closeSuggestBox,
-		suggestBoxMouseDown,
-		suggestBoxMouseOut,
-		suggestBoxMouseOver,
+		closeCityBox,
+		cityBoxMouseDown,
+		cityBoxMouseOut,
+		cityBoxMouseOver,
 	   lat, long} from './js/geo.js'
 import { startCounter,
 	   dayValue,
@@ -17,13 +15,12 @@ import './styles/style.scss'
 
 //exports
 export {
-	populateCountrySelector,
-	setDefaultCountry, 
+	autocomplete, 
 	postalCodeLookup, 
-	closeSuggestBox,
-	suggestBoxMouseDown,
-	suggestBoxMouseOut,
-	suggestBoxMouseOver,
+	closeCityBox,
+	cityBoxMouseDown,
+	cityBoxMouseOut,
+	cityBoxMouseOver,
 	lat, long,
 	
 	startCounter,
