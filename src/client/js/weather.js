@@ -7,7 +7,6 @@ function getWeather() {
 	if (Client.dayValue > 16) {
 		weatherInfo.innerHTML = "It's too early. The weather Gods haven't decided yet."
 	} else {
-		weatherInfo.innerHTML = "The weather Gods are cooking up your forecast."
 		
 		callWeather('http://localhost:8000/weather', {
 			lat: Client.lat,
@@ -16,11 +15,18 @@ function getWeather() {
 		.then(function(res){
 			console.log(res);
 			let weatherToDisplay = res.data.filter(function(e){
-				e.valid_date >= Client.dateInput;
+				return Date.parse(e.valid_date) >= Date.parse(Client.dateInput);
 			});
 			
 			console.log(weatherToDisplay);
-			//document.weatherInfo.textContent = weatherToDisplay.weather.description;
+			weatherInfo.innerHTML = 'Here is the available weather forecast for your stay';
+			for (const weatherData of weatherToDisplay) {
+				weatherInfo.innerHTML += `<div><img src="media/weatherbit_icons/${weatherData.weather.icon}.png" 
+										alt="${weatherData.weather.description}">
+										<p>${weatherData.temp}°C</p>
+										<p>${weatherData.valid_date}</p>
+										</div>`;
+			}
 		})
 	}
 }

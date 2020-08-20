@@ -95,3 +95,9 @@ button:focus {
 	  font-size: 14;
 	  background: #3333ff; color: white;  
 }
+
+#weather-info {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
