@@ -15,18 +15,17 @@ body {
   font-family: 'Oswald', sans-serif; }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
-label {
-  display: block;
-  font-size: 27px; }
-
 input {
-  display: block;
   background: #22b2da;
   color: #f0d43a;
   font-size: 20px;
   font-family: 'Oswald', sans-serif;
   border: none;
   margin: 1em; }
+
+#postalcodeInput {
+  /* Stop box from resizing in height ! */
+  flex-basis: content; }
 
 button {
   width: 400px;
@@ -70,24 +69,65 @@ button:focus {
   color: #f0d43a;
   font-family: 'Oswald', sans-serif; }
 
+input:-moz-read-only {
+  /* For Firefox */
+  background-color: #818181; }
+
+input:read-only {
+  background-color: #818181; }
+
 /* From Autocomplete Geonames*/
-#suggestBoxElement {
+#cityBoxElement {
   border: 1px solid #8FABFF;
   visibility: hidden;
   text-align: left;
   white-space: nowrap;
   background-color: #eeeeee; }
 
-.suggestions {
+.citySuggested {
   font-size: 14;
   background-color: #eeeeee; }
 
-.suggestionMouseOver {
+.cityBoxMouseOver {
   font-size: 14;
   background: #3333ff;
   color: white; }
 
-#weather-info {
+#weather-info, #code-city {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap; }
+
+* {
+  box-sizing: border-box; }
+
+/*the container must be positioned relative:*/
+.autocomplete {
+  position: relative;
+  display: inline-block; }
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0; }
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4; }
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; }
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: #ffffff; }

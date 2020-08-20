@@ -15,8 +15,10 @@
   </div>
 		<div id="code-city">
 			<input id="postalcodeInput" name="postalcode" onblur="Client.postalCodeLookup();" type="text" placeholder="postal code">
+			<div id=city>
 			<input id="placeInput" name="place" onblur="Client.closeCityBox();" type="text" placeholder="place" readonly>
 			<div style="visibility: hidden;" id="cityBoxElement"><!--Will auto populate --></div>
+				</div>
 			</div>
 		<input id="latitude" name="lat" size="12" type="text" placeholder="Latitude" readonly>
 		<input id="longitude" name="long" size="12" type="text" placeholder="Longitude" readonly>
