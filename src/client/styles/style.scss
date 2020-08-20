@@ -138,4 +138,9 @@ input:read-only {
 .autocomplete-active {
   background-color: DodgerBlue !important; 
   color: #ffffff; 
+
+#weather-info {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }

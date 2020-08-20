@@ -90,6 +90,7 @@ input:read-only {
   background: #3333ff;
   color: white; }
 
+
 * {
   box-sizing: border-box; }
 
@@ -123,3 +124,9 @@ input:read-only {
 .autocomplete-active {
   background-color: DodgerBlue !important;
   color: #ffffff; }
+
+#weather-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
