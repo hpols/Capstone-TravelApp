@@ -18,11 +18,8 @@ body{
 
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
-label{
-    font-size: 27px;
-}
-
 input{
+	display:block;
     background:#22b2da;
     color: #f0d43a;
     font-size: 20px;
@@ -77,19 +74,28 @@ button:focus {
 
 } 
 
+input:-moz-read-only { /* For Firefox */
+  background-color: #818181;
+
+}
+
+input:read-only { 
+  background-color: #818181;
+}
+
 /* From Autocomplete Geonames*/
-#suggestBoxElement {
+#cityBoxElement {
 	border: 1px solid #8FABFF; 
 	visibility:hidden; 
 	text-align: left;  
 	white-space: nowrap; 
 	background-color: #eeeeee;
 }
-  .suggestions { 
+  .citySuggested { 
 	  font-size: 14;
 	  background-color: #eeeeee;  
 }
-  .suggestionMouseOver { 
+  .cityBoxMouseOver { 
 	  font-size: 14;
 	  background: #3333ff; color: white;  
 }
@@ -102,17 +108,6 @@ button:focus {
 .autocomplete {
   position: relative;
   display: inline-block;
-}
-
-input[type=text] {
-  background-color: #f1f1f1;
-  width: 100%;
-}
-
-input[type=submit] {
-  background-color: DodgerBlue;
-  color: #fff;
-  cursor: pointer;
 }
 
 .autocomplete-items {
