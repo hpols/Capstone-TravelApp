@@ -65,21 +65,26 @@ function addData(req, res){
 	newData.push(req.body);
 }
 
-// https://api.weatherbit.io/v2.0/forecast/daily&lat=47.891024843906955&lon=7.6554107666015625&key=058d2a3f87d2492c84a485f55f8b7e22
 // https://api.weatherbit.io/v2.0/forecast/daily?&lat=38.123&lon=-78.543&key=API_KEY
-const baseUrl = 'https://api.weatherbit.io/v2.0/forecast/daily?';
-const latHolder = '&lat=';
-const longHolder = '&lon=';
-const keyHolder = '&key=';
-
 app.post('/weather', async function(req, res){
-	const request = await fetch (baseUrl + latHolder + req.body.lat + longHolder + req.body.long + keyHolder + process.env.WEATHER_API)
+	const request = await fetch (`https://api.weatherbit.io/v2.0/forecast/daily?&lat=${req.body.lat}&lon=${req.body.long}&key=${process.env.WEATHER_API}`);
 	try {
 			const receivedData = await request.json();
-			console.log(baseUrl + latHolder + req.body.lat + longHolder + req.body.long + keyHolder + process.env.WEATHER_API + '/' + receivedData);
 			res.send(receivedData);
 		} catch (error) {
-			console.log('error', error);
-			//TODO: send something back to flag the error
+			console.log('weather error: ', error);
 		}
+})
+
+//https://pixabay.com/api/?key=4947176-b25b60930efebf0f10d1c0318&q=Freiburg+Germany&image_type=photo
+//https://pixabay.com/api/?key=API_KEY&q=Boston&image_type=photo
+app.post('/pix', async function (req, res){
+	
+	const request = await fetch (`https://pixabay.com/api/?key=${process.env.PIX_API}&q=${req.body.city}+${req.body.country}&image_type=photo`);
+	try {
+		const receivedData = await request.json();
+		res.send(receivedData);
+	} catch (error) {
+		console.log('pix error: ', error);
+	}
 })

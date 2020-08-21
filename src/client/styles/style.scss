@@ -12,7 +12,7 @@ body{
     color: #f0d43a;
     justify-content: center;
     grid-gap: 1em;
-    font-size: 20px;
+    font-size: 1em;
     font-family: 'Oswald', sans-serif;
 }
 
@@ -21,15 +21,10 @@ body{
 input{
 	background:#22b2da;
     color: #f0d43a;
-    font-size: 20px;
+    font-size: 1em;
     font-family: 'Oswald', sans-serif;
     border: none;
 	margin: 1em;
-}
-
-#postalcodeInput {
-	/* Stop box from resizing in height ! */
-	flex-basis: content;
 }
 
 button{
@@ -37,21 +32,15 @@ button{
     height: 100px;
     background: #3b4a6b;
     color: #f0d43a;
-    font-size: 26px;
+    font-size: 1.25em;
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
 }
 h1{
-    font-size: 36px;
+    font-size: 1.5em;
 }
 
-textarea{
-    background:#22b2da;
-    color: #f0d43a;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-}
 /* Reset style for HTML element on active to have no border*/
 input:focus,
 select:focus,
@@ -96,11 +85,11 @@ input:read-only {
 	background-color: #eeeeee;
 }
   .citySuggested { 
-	  font-size: 14;
+	  font-size: 0.75em;
 	  background-color: #eeeeee;  
 }
   .cityBoxMouseOver { 
-	  font-size: 14;
+	  font-size: 0.75em;
 	  background: #3333ff; color: white; 
 }
 
@@ -108,18 +97,29 @@ input:read-only {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	  background: #3333ff; color: white;  
+	color: white;
+	font-weight: 400;
 }
 
-#weather-info {
+#days-weather {
+	height: 2em;
+	width: 2em;
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
-	  background: #3333ff; color: white;  
-}
-
-* {
-  box-sizing: border-box;
+    justify-content: center;
+	position:relative;
+	padding: 4em;
+	& img {
+		position: absolute;
+		max-width: 100%;
+	}
+	& p {
+		position: absolute;
+		top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+		text-shadow: 2px 2px 5px black;
+	}
 }
 
 /*the container must be positioned relative:*/
@@ -156,9 +156,4 @@ input:read-only {
 .autocomplete-active {
   background-color: DodgerBlue !important; 
   color: #ffffff; 
-
-#weather-info {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
 }

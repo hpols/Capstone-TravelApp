@@ -11,40 +11,30 @@ body {
   color: #f0d43a;
   justify-content: center;
   grid-gap: 1em;
-  font-size: 20px;
+  font-size: 1em;
   font-family: 'Oswald', sans-serif; }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 input {
   background: #22b2da;
   color: #f0d43a;
-  font-size: 20px;
+  font-size: 1em;
   font-family: 'Oswald', sans-serif;
   border: none;
   margin: 1em; }
-
-#postalcodeInput {
-  /* Stop box from resizing in height ! */
-  flex-basis: content; }
 
 button {
   width: 400px;
   height: 100px;
   background: #3b4a6b;
   color: #f0d43a;
-  font-size: 26px;
+  font-size: 1.25em;
   font-family: 'Oswald', sans-serif;
   border: none;
   box-shadow: 2px 4px 5px #444; }
 
 h1 {
-  font-size: 36px; }
-
-textarea {
-  background: #22b2da;
-  color: #f0d43a;
-  font-size: 20px;
-  font-family: 'Oswald', sans-serif; }
+  font-size: 1.5em; }
 
 /* Reset style for HTML element on active to have no border*/
 input:focus,
@@ -85,26 +75,38 @@ input:read-only {
   background-color: #eeeeee; }
 
 .citySuggested {
-  font-size: 14;
+  font-size: 0.75em;
   background-color: #eeeeee; }
 
 .cityBoxMouseOver {
-  font-size: 14;
+  font-size: 0.75em;
   background: #3333ff;
   color: white; }
 
 #weather-info, #code-city {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  color: white;
+  font-weight: 400; }
 
-#weather-info {
+#days-weather {
+  height: 2em;
+  width: 2em;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; }
-
-* {
-  box-sizing: border-box; }
+  justify-content: center;
+  position: relative;
+  padding: 4em; }
+  #days-weather img {
+    position: absolute;
+    max-width: 100%; }
+  #days-weather p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 2px 2px 5px black; }
 
 /*the container must be positioned relative:*/
 .autocomplete {
@@ -136,8 +138,3 @@ input:read-only {
 .autocomplete-active {
   background-color: DodgerBlue !important;
   color: #ffffff; }
-
-#weather-info {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; }

@@ -10,6 +10,7 @@ const countrySelectors = document.getElementById("myInput");
 let countriesFromGeo;
 let selectedCountry;
 let lat, long;
+let ctry, city;
 
 function getCountryCode(countryArray, selected) {
 	for(const arrItems of countryArray) {
@@ -59,6 +60,7 @@ function postalCodeLookup() {
     if (postalcodes.length == 1) {
       // The postalcode only refers to one place so directly fill the form 
       placeInput.value = postalcodes[0].placeName;
+		city = placeInput.value;
 		setLongLat(postalcodes[0]);
     }
       closeCityBox();
@@ -74,9 +76,7 @@ function closeCityBox() {
 
 function setLongLat(postalcodeData) {
 	lat = postalcodeData.lat; //populate the variables so the data can be retrieved
-	long = postalcodeData.lng;
-	document.getElementById('latitude').value = lat;
-	document.getElementById('longitude').value = long;	
+	long = postalcodeData.lng;	
 }
 
 // remove highlight on mouse out event
@@ -90,6 +90,7 @@ function cityBoxMouseOut(obj) {
 function cityBoxMouseDown(obj) {
   closeCityBox();
   placeInput.value = postalcodes[obj].placeName;
+	city = placeInput.value;
   setLongLat(postalcodes[obj]);
 }
 
@@ -153,6 +154,7 @@ function autocomplete(autoInput, arr) {
           childDiv.addEventListener("click", function(e) {
               /*insert the value for the autocomplete text field:*/
               autoInput.value = this.getElementsByTagName("input")[0].value;
+			  ctry = autoInput.value;
 			  selectedCountry = this.getElementsByTagName("input")[0].id;
               /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
@@ -215,5 +217,6 @@ export {
 	cityBoxMouseOut,
 	cityBoxMouseOver,
 	closeCityBox,
-	lat, long
+	lat, long,
+	ctry, city
 }

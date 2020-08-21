@@ -1,6 +1,12 @@
 // JavaScript Document
 let weatherInfo = document.getElementById('weather-info');
 
+function convertDate(weatherData) {
+	let jsonDate  = new Date(weatherData.valid_date);
+	let displayDate = jsonDate.toLocaleDateString('en-US');
+	return displayDate;
+}
+
 function getWeather() {
 	event.preventDefault;
 	
@@ -19,13 +25,11 @@ function getWeather() {
 			});
 			
 			console.log(weatherToDisplay);
-			weatherInfo.innerHTML = 'Here is the available weather forecast for your stay';
+			document.getElementById('weather-header').innerHTML = `Here is the available weather forecast for your stay`;
 			for (const weatherData of weatherToDisplay) {
-				weatherInfo.innerHTML += `<div><img src="media/weatherbit_icons/${weatherData.weather.icon}.png" 
-										alt="${weatherData.weather.description}">
-										<p>${weatherData.temp}°C</p>
-										<p>${weatherData.valid_date}</p>
-										</div>`;
+				weatherInfo.innerHTML += `<div id="days-weather">
+					<img src="media/weatherbit_icons/${weatherData.weather.icon}.png" alt="${weatherData.weather.description}">
+					<p><strong>${convertDate(weatherData)}</strong><br>${weatherData.temp}°C</p></div>`;
 			}
 		})
 	}

@@ -5,11 +5,13 @@ import { autocomplete,
 		cityBoxMouseDown,
 		cityBoxMouseOut,
 		cityBoxMouseOver,
-	   lat, long} from './js/geo.js'
+		lat, long,
+		ctry, city} from './js/geo.js'
 import { startCounter,
 	   dayValue,
 	   dateInput} from './js/counter.js'
 import {getWeather} from './js/weather.js'
+import {getPix} from './js/pix.js'
 
 import './styles/style.scss'
 
@@ -22,10 +24,13 @@ export {
 	cityBoxMouseOut,
 	cityBoxMouseOver,
 	lat, long,
+	ctry, city,
 	
 	startCounter,
 	dayValue,
 	dateInput,
 	
-	getWeather
+	getWeather,
+
+	getPix
 }
