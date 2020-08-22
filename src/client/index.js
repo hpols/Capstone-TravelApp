@@ -9,7 +9,8 @@ import { autocomplete,
 		ctry, city} from './js/geo.js'
 import { startCounter,
 	   dayValue,
-	   dateInput} from './js/counter.js'
+	   dateInput,
+	   getTravelTime} from './js/counter.js'
 import {getWeather} from './js/weather.js'
 import {getPix} from './js/pix.js'
 
@@ -29,6 +30,7 @@ export {
 	startCounter,
 	dayValue,
 	dateInput,
+	getTravelTime,
 	
 	getWeather,
 

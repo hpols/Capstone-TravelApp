@@ -59,7 +59,7 @@ function postalCodeLookup() {
 	  let id = 0;
 	  for(const postalcode of postalcodes) {
 		  citySelItem = document.createElement("DIV"); //one div for each possible match
-			//bold matching letters of option and provide hidden carrier with all needed info incase it is selected
+			//Show each option and provide hidden carrier with all needed info incase it is selected
           citySelItem.innerHTML = `${postalcode.countryCode} ${postalcode.postalcode}   ${postalcode.placeName }<input type='hidden' value='${postalcode.placeName }' id='${postalcode.countryCode}'>`;
           citySelItem.addEventListener("click", function(e) { //user has selected an item
               // get needed data to display & store

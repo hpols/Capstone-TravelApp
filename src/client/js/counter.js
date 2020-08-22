@@ -5,9 +5,9 @@ const hourFactor = (minFactor * 60);
 const dayFactor = (hourFactor * 24);
 
 const counter = document.getElementById('counter');
-let travelDate = '';
-let dateInput = '';
-let dayValue, hourValue, minuteValue, secondValue;
+let travelDate, travelReturn;
+let dateInput, returnInput;
+let dayValue;
 
 function startCounter() {
 	dateInput = document.getElementById('traveldate').value;
@@ -21,32 +21,37 @@ function startCounter() {
 	} 
 }
 
+function getTravelTime() {
+	returnInput = document.getElementById('travelreturn').value;
+	countdown(); //update to show amount of days
+}
+
 function countdown() {
-	setInterval(function(){
-  	var now = new Date().getTime();// Capture current time
-	var timeLeft = travelDate - now; //how much time is left before the travel date?
+  	let now = new Date().getTime();// Capture current time
+	let timeLeft = travelDate - now; //how much time is left before the travel date?
 
   	// Time calculations for days, hours, minutes and seconds
 	dayValue = Math.floor(timeLeft / dayFactor);
-	hourValue = Math.floor((timeLeft % dayFactor) / hourFactor);
-	minuteValue = Math.floor((timeLeft % hourFactor) / minFactor);
-  	secondValue = Math.floor((timeLeft % minFactor) / secFactor);
 
-  // Display the result in the element with id="counter"
-  counter.innerHTML = dayValue + "d " + hourValue + "h "
-  + minuteValue + "m " + secondValue + "s ";
+	// Display the result in the element with id="counter"
+	counter.innerHTML = `You will be departing in ${dayValue} days`;
+	if(!getTravelTime) { //ToDO: doesn't show up
+		counter.innerHTML += ` for ${returnInput} glorious days in ${Client.selectedCity}, ${Client.selectedCountry}.`
+	} else {
+		counter.innerHTML += ` for ${Client.selectedCity}, ${Client.selectedCountry}.`
+	}
 
   // If the count down is finished, remove counter 
   if (timeLeft < 0) {
     clearInterval(countdown());
     counter.innerHTML = '';
   }
-	}, 1000);
 }
 // JavaScript Document
 
 export {
 	startCounter,
 	dayValue,
-	dateInput
+	dateInput,
+	getTravelTime
 }

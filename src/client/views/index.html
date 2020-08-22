@@ -23,9 +23,10 @@
 			<input id="longitude" name="long" size="12" type="text" placeholder="Longitude" readonly>-->
 		</form>
 		<div id="countdown">
-			<label for="date">Traveldate: </label>
+			<label for="date">Traveldates: </label>
 			<input type="date" id="traveldate" placeholder="yyyy-mm-dd" onblur="Client.startCounter();">
-			<!--placeholder to show in browsers that do not support the date-picker -->
+			<input type="date" id="travelreturn" placeholder="yyyy-mm-dd" onblur="Client.getTravelTime();">
+			<!--placeholder shows in browsers that do not support the date-picker -->
 			<div id="counter"></div> 
 		</div>
 		<div id="weather">
