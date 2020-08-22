@@ -9,8 +9,8 @@ const countrySelectors = document.getElementById("myInput");
 
 let countriesFromGeo;
 let selectedCountry;
-let lat, long;
-let ctry, city;
+let lat, long, ctry, city; //to export data to other js files etc.
+let inFocus; //for selectors
 
 function getCountryCode(countryArray, selected) {
 	for(const arrItems of countryArray) {
@@ -20,12 +20,12 @@ function getCountryCode(countryArray, selected) {
 	}
 }
 
-// Once the user leaves the postal code input field this function is called to retrieve an array of places from geonames.org JSON
+// On leaving the postal code input field this function retrieves an array of places from geonames.org JSON
 // for the given postal code 
 function postalCodeLookup() {
-  // display 'loading' in suggest box
+  /*display 'loading' in suggest box
   suggestionBox.style.visibility = 'visible';
-  suggestionBox.innerHTML = '<small><i>loading ...</i></small>';
+  suggestionBox.innerHTML = '<small><i>loading ...</i></small>';*/
 
   var postalcode = document.getElementById("postalcodeInput").value;
 
@@ -40,22 +40,45 @@ function postalCodeLookup() {
 
   // save place array in 'postalcodes' to make it accessible from mouse event handlers
   postalcodes = receivedData.postalcodes;
-    	
+    	let citySelBox, citySelItem;
+		if (!postalcodes) { 
+			  return false; //something went wrong
+		  }
   if (postalcodes.length > 1) {
-    // Make suggestion box visible and display the options
+      inFocus = -1;
+      citySelBox = document.createElement("DIV"); // create a DIV to hold the possible values
+      citySelBox.setAttribute("id", citySelBox.id + "city-list");
+      citySelBox.setAttribute("class", "autocomplete-items");
+      placeInput.parentNode.appendChild(citySelBox); //apend DIV to the city container
+	  
+    /*Make suggestion box visible and display the options
     document.getElementById('cityBoxElement').style.visibility = 'visible';
-    var cityBoxHTML  = '';
+    var cityBoxHTML  = '';*/
+	  
     // iterate over places and build suggest box content
 	  let id = 0;
 	  for(const postalcode of postalcodes) {
+		  citySelItem = document.createElement("DIV"); //one div for each possible match
+			//bold matching letters of option and provide hidden carrier with all needed info incase it is selected
+          citySelItem.innerHTML = `${postalcode.countryCode} ${postalcode.postalcode}   ${postalcode.placeName }<input type='hidden' value='${postalcode.placeName }' id='${postalcode.countryCode}'>`;
+          citySelItem.addEventListener("click", function(e) { //user has selected an item
+              // get needed data to display & store
+              placeInputInput.value = this.getElementsByTagName("input")[0].value;
+			  city = placeInput.value;
+			  selectedCountry = this.getElementsByTagName("input")[0].id;
+              closeAllLists(); //cose list(s)
+          });
+          citySelBox.appendChild(citySelItem);
+		  
+		/*  
 		// for every postalcode record we create a html div with incremental id for later retrieval 
       	// define mouse event handlers to highlight places on mouseover and to select a place on click
-		  cityBoxHTML += `<div class='citySuggested' id='pcId${id}' onmousedown='Client.cityBoxMouseDown("${id}")' onmouseover='Client.cityBoxMouseOver("${id}")' onmouseout='Client.cityBoxMouseOut("${id}")'> ${postalcode.countryCode} ${postalcode.postalcode}   ${postalcode.placeName }</div>`;
-		 
-		  id++
+		cityBoxHTML += `<div class='citySuggested' id='pcId${id}' onmousedown='Client.cityBoxMouseDown("${id}")' onmouseover='Client.cityBoxMouseOver("${id}")' onmouseout='Client.cityBoxMouseOut("${id}")'> ${postalcode.countryCode} ${postalcode.postalcode}   ${postalcode.placeName }</div>`;
+		id++*/
 	  }
-    // display suggest box
-    suggestionBox.innerHTML = cityBoxHTML;
+
+    /*display suggest box
+    suggestionBox.innerHTML = cityBoxHTML;*/
   } else {
     if (postalcodes.length == 1) {
       // The postalcode only refers to one place so directly fill the form 
@@ -112,25 +135,19 @@ const retrieveData = async (url= ' ') => {
 	}
 }
 
-// AUTOCOMPLETE COUNTRY INPUT
+// AUTOCOMPLETE COUNTRY INPUT taking in the textfield and an array of possible values for the autocomplete
 function autocomplete(autoInput, arr) {
-  /*the autocomplete function takes two arguments,
-  the text field element and an array of possible autocompleted values:*/
-  var currentFocus;
-  /*execute a function when someone writes in the text field:*/
-  autoInput.addEventListener("input", function(e) {
-      var newDiv, childDiv, i, inputValue = this.value;
-      /*close any already open lists of autocompleted values*/
-      closeAllLists();
-      if (!inputValue) { return false;}
-      currentFocus = -1;
-      /*create a DIV element that will contain the items (values):*/
-      newDiv = document.createElement("DIV");
-      newDiv.setAttribute("id", this.id + "autocomplete-list");
-      newDiv.setAttribute("class", "autocomplete-items");
-      /*append the DIV element as a child of the autocomplete container:*/
-      this.parentNode.appendChild(newDiv);
-      /*for each item in the array...*/
+  autoInput.addEventListener("input", function(e) { //when user starts writing in the input field
+      let selBox, selItem, inputValue = this.value;
+      closeAllLists(); //work from a clean slate (no lists open to begin with)
+		  if (!inputValue) { 
+			  return false;
+		  }
+      inFocus = -1;
+      selBox = document.createElement("DIV"); // create a DIV to hold the possible values
+      selBox.setAttribute("id", this.id + "autocomplete-list");
+      selBox.setAttribute("class", "autocomplete-items");
+      this.parentNode.appendChild(selBox); //apend DIV to the autocomplete container
 	  
 	retrieveData('http://api.geonames.org/countryInfoJSON?username=atschpe')	
 	.then(function (countries){
@@ -141,62 +158,47 @@ function autocomplete(autoInput, arr) {
 			/*check if the item starts with the same letters as the text field value:*/
 			countriesFromGeo = {
 				code : country.countryCode,
-					name : country.countryName}
+				name : country.countryName}
         if (countriesFromGeo.name.substr(0, inputValue.length).toUpperCase() == inputValue.toUpperCase()) {
-          /*create a DIV element for each matching element:*/
-          childDiv = document.createElement("DIV");
-          /*make the matching letters bold:*/
-          childDiv.innerHTML = "<strong>" + countriesFromGeo.name.substr(0, inputValue.length) + "</strong>";
-          childDiv.innerHTML += countriesFromGeo.name.substr(inputValue.length);
-          /*insert a input field that will hold the current array item's value:*/
-          childDiv.innerHTML += `<input type='hidden' value='${countriesFromGeo.name}' id='${countriesFromGeo.code}'>`;
-          /*execute a function when someone clicks on the item value (DIV element):*/
-          childDiv.addEventListener("click", function(e) {
-              /*insert the value for the autocomplete text field:*/
+          selItem = document.createElement("DIV"); //one div for each possible match
+			//bold matching letters of option and provide hidden carrier with all needed info incase it is selected
+          selItem.innerHTML = `<strong>${countriesFromGeo.name.substr(0, inputValue.length)}</strong>${countriesFromGeo.name.substr(inputValue.length)}<input type='hidden' value='${countriesFromGeo.name}' id='${countriesFromGeo.code}'>`;
+          selItem.addEventListener("click", function(e) { //user has selected an item
+              // get needed data to display & store
               autoInput.value = this.getElementsByTagName("input")[0].value;
 			  ctry = autoInput.value;
 			  selectedCountry = this.getElementsByTagName("input")[0].id;
-              /*close the list of autocompleted values,
-              (or any other open lists of autocompleted values:*/
-              closeAllLists();
+              closeAllLists(); //cose list(s)
           });
-          newDiv.appendChild(childDiv);
+          selBox.appendChild(selItem);
         }
 		}				 
 	});
   });
-  /*execute a function presses a key on the keyboard:*/
-  autoInput.addEventListener("keydown", function(e) {
-      var x = document.getElementById(this.id + "autocomplete-list");
-      if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) {
-        /*If the arrow DOWN key is pressed,
-        increase the currentFocus variable:*/
-        currentFocus++;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 38) { //up
-        /*If the arrow UP key is pressed,
-        decrease the currentFocus variable:*/
-        currentFocus--;
-        /*and and make the current item more visible:*/
-        addActive(x);
-      } else if (e.keyCode == 13) {
-        /*If the ENTER key is pressed, prevent the form from being submitted,*/
-        e.preventDefault();
-        if (currentFocus > -1) {
-          /*and simulate a click on the "active" item:*/
-          if (x) x[currentFocus].click();
+  // handle keyboard events
+  autoInput.addEventListener("keydown", function(ev) {
+      var autoList = document.getElementById(this.id + "autocomplete-list");
+      if (autoList) autoList = autoList.getElementsByTagName("div");
+      if (ev.keyCode == 40) {//Arrow Down
+        inFocus++; //increase by a step
+        addActive(autoList);//activate current item
+      } else if (ev.keyCode == 38) { //Arrow Up
+        inFocus--; //decrease by a step
+        addActive(autoList);//activate current item
+      } else if (ev.keyCode == 13) {//Enter Key
+        ev.preventDefault();
+        if (inFocus > -1) {
+          if (autoList) autoList[inFocus].click();//simulate click on active item
         }
       }
   });
   
-  function closeAllLists(elmnt) {
+  function closeAllLists(el) {
     /*close all autocomplete lists in the document,
     except the one passed as an argument:*/
     var autoItems = document.getElementsByClassName("autocomplete-items");
     for (const autoItem of autoItems) {
-      if (elmnt != autoItem && elmnt != autoInput) {
+      if (el != autoItem && el != autoInput) {
         autoItem.parentNode.removeChild(autoItem);
       }
     }
@@ -207,8 +209,8 @@ function autocomplete(autoInput, arr) {
   });
 }
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("myInput"), countriesFromGeo);
+//Autocomplete function is triggered when typing in country field. Pass in countries array as possible autocomplete values
+autocomplete(countrySelectors, countriesFromGeo);
 
 export {
 	autocomplete,
@@ -217,6 +219,5 @@ export {
 	cityBoxMouseOut,
 	cityBoxMouseOver,
 	closeCityBox,
-	lat, long,
-	ctry, city
+	lat, long, ctry, city
 }
