@@ -1,5 +1,4 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -47,17 +46,6 @@ function sendData(req, res){
 	res.send(projectData);
 } 
 
-//POST Route receiving: temperature – date – user response
-app.post('/add', callback);
-function callback(req, res){
-	projectData = {
-		temperature: req.body.temperature,
-		date: req.body.date,
-		userResponse: req.body.userResponse
-	}
-	res.send(projectData);
-}
-
 //POST new data:
 const newData = [];
 app.post('/data', addData);
@@ -88,3 +76,5 @@ app.post('/pix', async function (req, res){
 		console.log('pix error: ', error);
 	}
 })
+
+module.exports = app; //for testing

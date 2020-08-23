@@ -36,6 +36,8 @@ function updateTravelInfo() {
 	returnValue = Math.floor(timeDuration / dayFactor);
 
 	counter.innerHTML += `${dayValue} more days then you're off to enjoy your ${returnValue}-day stay.`
+	
+	Client.getWeather();
 }		
 
 export {
