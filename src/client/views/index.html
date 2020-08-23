@@ -8,40 +8,44 @@
 	
 <body>
 	<div id="app">
-		<form name="home" autocomplete="off" action="/action_page.php"> <!-- auto complete set on the div itself -->
-			<div class="autocomplete">
-				<input id="myInput" type="text" name="myCountry" placeholder="Country">
-			</div>
-			<div id="code-city">
-				<input id="postalcodeInput" name="postalcode" onblur="Client.postalCodeLookup();" type="text" placeholder="postal code">
-				<div id="city">
-					<input id="placeInput" name="place" onblur="Client.closeCityBox();" type="text" placeholder="place" readonly>
-					<div style="visibility: hidden;" id="cityBoxElement"><!--Will auto populate --></div>
+		<header id="header">
+			<h1>Travel App</h1>
+		</header>
+		<div id="details">
+			<form name="travel" autocomplete="off" action="/action_page.php"> 
+				<!-- auto complete set on the div itself -->
+				<div class="autocomplete">
+					<input id="countryInput" type="text" name="myCountry" placeholder="Country">
+				</div>
+				<div id="code-city">
+					<input id="postalcodeInput" name="postalcode" onblur="Client.postalCodeLookup()" type="text" placeholder="postal code">
+					<div id="city">
+						<input id="placeInput" name="place" onblur="Client.closeCityBox()" type="text" placeholder="place" readonly>
+						<!--<div style="visibility: hidden;" id="cityBoxElement">Will auto populate </div>-->
+					</div>
+				</div>
+				<label for="date">Traveldates: </label>
+				<div id="dateSpan">
+					<input type="date" id="traveldate" placeholder="yyyy-mm-dd" class="date">
+					<div id="arrow">&#8594;</div>
+					<input type="date" id="travelreturn" placeholder="yyyy-mm-dd" onblur="Client.updateTravelInfo();" class="date">
+					<!--placeholder shows in browsers that do not support the date-picker -->
+					</div>
+			</form>
+			<div id="weather">
+				<div id="weather-header"> </div>
+				<div id="weather-info">
 				</div>
 			</div>
-			<!--<input id="latitude" name="lat" size="12" type="text" placeholder="Latitude" readonly>
-			<input id="longitude" name="long" size="12" type="text" placeholder="Longitude" readonly>-->
-		</form>
-		<div id="countdown">
-			<label for="date">Traveldates: </label>
-			<input type="date" id="traveldate" placeholder="yyyy-mm-dd" onblur="Client.startCounter();">
-			<input type="date" id="travelreturn" placeholder="yyyy-mm-dd" onblur="Client.getTravelTime();">
-			<!--placeholder shows in browsers that do not support the date-picker -->
+		</div>
+		<div id="results">
 			<div id="counter"></div> 
-		</div>
-		<div id="weather">
-			<input type="submit" name="" value="get Weather" onclick="return Client.getWeather(event)" onsubmit="return getWeather(event)">
-			<div id="weather-header"> </div>
-			<div id="weather-info">
-			</div>
-		</div>
-		<div id="pix">
-			<input type="submit" name="" value="get Pix" onclick="return Client.getPix(event)" onsubmit="return getPix(event)">
 			<div id="pix-image"></div>
 		</div>
-	</div>
-</body>
-	<footer>
+
+	<footer id="footer">
 	<div>With thanks to <a href="http://www.geonames.org">GeoNames</a>, <a href="https://www.weatherbit.io">WeatherBit</a> and <a href="https://pixabay.com">Pixabay</a></div>
 	</footer>
+</div>
+	</body>
 </html>

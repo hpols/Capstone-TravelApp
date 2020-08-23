@@ -1,17 +1,14 @@
 // JavaScript Document
 function getPix() {
-	event.preventDefault;
+	//event.preventDefault;
 	
 	requestPix('http://localhost:8000/pix', {
 			city: Client.city,
 			country: Client.ctry
 		}).then(function(pixData){
-		if(pixData.hits.length >0) {
+		if(pixData.hits.length > 0) {
 			console.log(pixData);
-			document.getElementById('pix-image'). innerHTML = `<figure id="pix-frame">
-				<img src="${pixData.hits[0].webformatURL}" alt="${Client.destination}">
-			    <figcaption>Image by <a href="${pixData.hits[0].userImageURL}">${pixData.hits[0].user}</a></figcaption>
-			</figure>`
+			document.getElementById('pix-image'). innerHTML = `<figure id="pix-frame"><img src="${pixData.hits[0].webformatURL}" alt="${Client.destination}"><figcaption>Image by <a href="${pixData.hits[0].userImageURL}">${pixData.hits[0].user}</a></figcaption></figure>`
 		}
 		
 	})

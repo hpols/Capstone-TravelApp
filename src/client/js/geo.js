@@ -5,7 +5,7 @@
 let postalcodes;
 const placeInput = document.getElementById("placeInput"); 
 const suggestionBox = document.getElementById('cityBoxElement');
-const countrySelectors = document.getElementById("myInput");
+const countrySelectors = document.getElementById("countryInput");
 
 let countriesFromGeo;
 let selectedCountry;
@@ -27,10 +27,10 @@ function postalCodeLookup() {
   suggestionBox.style.visibility = 'visible';
   suggestionBox.innerHTML = '<small><i>loading ...</i></small>';*/
 
-  var postalcode = document.getElementById("postalcodeInput").value;
+  let postalcode = document.getElementById("postalcodeInput").value;
 
 	//example: http://api.geonames.org/postalCodeLookupJSON?postalcode=6600&country=AT&username=demo
-  var request = 'http://api.geonames.org/postalCodeLookupJSON?postalcode=' + postalcode + '&country=' + selectedCountry + '&username=atschpe';
+  let request = 'http://api.geonames.org/postalCodeLookupJSON?postalcode=' + postalcode + '&country=' + selectedCountry + '&username=atschpe';
 	
 	retrieveData(request)
 	.then(function(receivedData) {
@@ -53,14 +53,14 @@ function postalCodeLookup() {
 	  
     /*Make suggestion box visible and display the options
     document.getElementById('cityBoxElement').style.visibility = 'visible';
-    var cityBoxHTML  = '';*/
+    let cityBoxHTML  = '';*/
 	  
     // iterate over places and build suggest box content
 	  let id = 0;
 	  for(const postalcode of postalcodes) {
 		  citySelItem = document.createElement("DIV"); //one div for each possible match
 			//Show each option and provide hidden carrier with all needed info incase it is selected
-          citySelItem.innerHTML = `${postalcode.countryCode} ${postalcode.postalcode}   ${postalcode.placeName }<input type='hidden' value='${postalcode.placeName }' id='${postalcode.countryCode}'>`;
+          citySelItem.innerHTML = `${postalcode.countryCode} ${postalcode.postalcode}   ${postalcode.placeName }<input type='hidden' value="${postalcode.placeName }" id="${postalcode.countryCode}">`;
           citySelItem.addEventListener("click", function(e) { //user has selected an item
               // get needed data to display & store
               placeInputInput.value = this.getElementsByTagName("input")[0].value;
@@ -85,6 +85,7 @@ function postalCodeLookup() {
       placeInput.value = postalcodes[0].placeName;
 		city = placeInput.value;
 		setLongLat(postalcodes[0]);
+		Client.getPix();
     }
       closeCityBox();
 	  
@@ -115,6 +116,7 @@ function cityBoxMouseDown(obj) {
   placeInput.value = postalcodes[obj].placeName;
 	city = placeInput.value;
   setLongLat(postalcodes[obj]);
+	Client.getPix();
 }
 
 // function to highlight places on mouse over event
@@ -162,7 +164,7 @@ function autocomplete(autoInput, arr) {
         if (countriesFromGeo.name.substr(0, inputValue.length).toUpperCase() == inputValue.toUpperCase()) {
           selItem = document.createElement("DIV"); //one div for each possible match
 			//bold matching letters of option and provide hidden carrier with all needed info incase it is selected
-          selItem.innerHTML = `<strong>${countriesFromGeo.name.substr(0, inputValue.length)}</strong>${countriesFromGeo.name.substr(inputValue.length)}<input type='hidden' value='${countriesFromGeo.name}' id='${countriesFromGeo.code}'>`;
+          selItem.innerHTML = `<strong>${countriesFromGeo.name.substr(0, inputValue.length)}</strong>${countriesFromGeo.name.substr(inputValue.length)}<input type="hidden" value="${countriesFromGeo.name}" id="${countriesFromGeo.code}">`;
           selItem.addEventListener("click", function(e) { //user has selected an item
               // get needed data to display & store
               autoInput.value = this.getElementsByTagName("input")[0].value;
@@ -177,7 +179,7 @@ function autocomplete(autoInput, arr) {
   });
   // handle keyboard events
   autoInput.addEventListener("keydown", function(ev) {
-      var autoList = document.getElementById(this.id + "autocomplete-list");
+      const autoList = document.getElementById(this.id + "autocomplete-list");
       if (autoList) autoList = autoList.getElementsByTagName("div");
       if (ev.keyCode == 40) {//Arrow Down
         inFocus++; //increase by a step
@@ -196,7 +198,7 @@ function autocomplete(autoInput, arr) {
   function closeAllLists(el) {
     /*close all autocomplete lists in the document,
     except the one passed as an argument:*/
-    var autoItems = document.getElementsByClassName("autocomplete-items");
+    let autoItems = document.getElementsByClassName("autocomplete-items");
     for (const autoItem of autoItems) {
       if (el != autoItem && el != autoInput) {
         autoItem.parentNode.removeChild(autoItem);
