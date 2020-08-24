@@ -52,7 +52,7 @@ function addData(req, res){
 }
 
 // https://api.weatherbit.io/v2.0/forecast/daily?&lat=38.123&lon=-78.543&key=API_KEY
-app.post('/weather', (req, res) => {
+app.post('/weather', async (req, res) => {
 	const request = await fetch (`https://api.weatherbit.io/v2.0/forecast/daily?&lat=${req.body.lat}&lon=${req.body.long}&key=${process.env.WEATHER_API}`);
 	try {
 			const receivedData = await request.json();
@@ -63,7 +63,7 @@ app.post('/weather', (req, res) => {
 })
 
 //https://pixabay.com/api/?key=API_KEY&q=Boston&image_type=photo
-app.post('/pix', (req, res) => {
+app.post('/pix', async (req, res) => {
 	
 	const request = await fetch (`https://pixabay.com/api/?key=${process.env.PIX_API}&q=${req.body.city}+${req.body.country}&image_type=photo`);
 	try {

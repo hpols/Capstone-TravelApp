@@ -2,10 +2,14 @@ $primary-color: #2b5876;
 $secondary-color: #4e4376;
 $text-color: #f0d43a;
 
+html {
+	height: 100%;
+}
 body{
     font-size: 1em;
 	font-family: 'Oswald', sans-serif;
 	color: $text-color;
+	height:100%;
 	background-image: -webkit-linear-gradient(340deg, $primary-color 0%, $secondary-color 100%);
 	background-image: -moz-linear-gradient(340deg, $primary-color 0%, $secondary-color 100%);
 	background-image: -o-linear-gradient(340deg, $primary-color 0%, $secondary-color 100%);
@@ -15,46 +19,51 @@ body{
 header, footer {
 	background: rgba(0,0,0,0.50);
 	padding: 1em;
-	height: 5em;
-	//TODO: get text to center vertically
+	height: 3em;
 }
 
 footer {
-	position:absolute;
-	width: 97%;
-	bottom: 0;
+	position:static;
+	height:100%;
 }
 
 #header {
 	grid-area: hd;
+	height:100%;
 }
 #details {
 	grid-area: ri;
+	padding: 1em;
+	height:100%;
 }
 
 #results {
 	grid-area: le;
+	padding: 1em;
+	height:100%;
 }
 
 #footer {
 	grid-area: ft;
+	height:100%;
 }
-
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 input{
 	background:none;
     color: $text-color;
     font-size: 1em;
-	min-width: 100px;
     font-family: 'Oswald', sans-serif;
     border: 1 inset $primary-color;
 	margin: 1em;
 	&:hover {
 		font-style: italic;
-		&[readonly] {
-			font-style: normal;
-		}
+	}
+	&:-moz-read-only { /* For Firefox */
+  		background-color: $secondary-color;
+	}
+	&:read-only { 
+  		background-color: $secondary-color;
 	}
 }
 
@@ -96,6 +105,7 @@ textarea:focus,
 button:focus {
     outline: none;
 }
+
 /* Style for Placeholder Text*/
 ::placeholder { /* Firefox, Chrome, Opera */ 
     color: $text-color; 
@@ -108,14 +118,6 @@ button:focus {
 ::-ms-input-placeholder { /* Microsoft Edge */ 
     color: $text-color; 
 } 
-
-input:-moz-read-only { /* For Firefox */
-  background-color: $secondary-color;
-}
-
-input:read-only { 
-  background-color: $secondary-color;
-}
 
 #weather-info, #code-city, #dateSpan {
 	display: flex;
@@ -155,10 +157,14 @@ input:read-only {
 	min-width: 0;
 }
 
+#counter {
+	text-align: center;
+}
+
 @media(max-width:800px){
 	#app {
 		display:grid;
-		grid-template-columns: repeat(8, 1fr);
+		grid-template-columns: auto 1fr auto;
 		grid-auto-rows: minmax(100px, auto);
 		height: 100vh;
 		grid-gap: 1em;
@@ -173,7 +179,7 @@ input:read-only {
 @media(min-width:801px){
 	#app{
 	display: grid;
-	grid-auto-rows: minmax(150px, auto);
+	grid-auto-rows: auto 1fr auto;
 	grid-template-columns: repeat(8, 1fr);
 	height: 100vh;
 	grid-gap: 1em;
