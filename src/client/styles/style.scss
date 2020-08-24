@@ -22,11 +22,6 @@ header, footer {
 	height: 3em;
 }
 
-footer {
-	position:static;
-	height:100%;
-}
-
 #header {
 	grid-area: hd;
 	height:100%;
@@ -99,10 +94,7 @@ img{
 }
 
 /* Reset style for HTML element on active to have no border*/
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
+:focus {
     outline: none;
 }
 
@@ -147,7 +139,7 @@ button:focus {
 		position: absolute;
 		text-align: center;
 		top: 50%;
-  left: 50%;
+  		left: 50%;
   transform: translate(-50%, -50%);
 		text-shadow: 2px 2px 5px black;
 	}

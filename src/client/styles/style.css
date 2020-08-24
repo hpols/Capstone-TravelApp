@@ -16,10 +16,6 @@ header, footer {
   padding: 1em;
   height: 3em; }
 
-footer {
-  position: static;
-  height: 100%; }
-
 #header {
   grid-area: hd;
   height: 100%; }
@@ -81,10 +77,7 @@ img {
   object-fit: cover; }
 
 /* Reset style for HTML element on active to have no border*/
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
+:focus {
   outline: none; }
 
 /* Style for Placeholder Text*/
