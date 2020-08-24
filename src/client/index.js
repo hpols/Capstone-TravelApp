@@ -1,15 +1,13 @@
 //imports
 import { autocomplete,
+		geoInput,
+		countryLookup,
 		postalCodeLookup, 
-		closeCityBox,
-		cityBoxMouseDown,
-		cityBoxMouseOut,
-		cityBoxMouseOver,
 		lat, long, ctry, city} from './js/geo.js'
 
 import { updateTravelInfo,
 	   dayValue,
-	   dateInput} from './js/app.js'
+	   dateInput, returnInput} from './js/app.js'
 
 import {getWeather} from './js/weather.js'
 
@@ -19,17 +17,14 @@ import './styles/style.scss'
 
 //exports
 export {
-	autocomplete, 
+	geoInput,
+	countryLookup,
 	postalCodeLookup, 
-	closeCityBox,
-	cityBoxMouseDown,
-	cityBoxMouseOut,
-	cityBoxMouseOver,
 	lat, long, ctry, city,
 	
 	updateTravelInfo,
 	dayValue,
-	dateInput,
+	dateInput, returnInput,
 	
 	getWeather,
 

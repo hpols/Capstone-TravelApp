@@ -104,23 +104,6 @@ input:-moz-read-only {
 input:read-only {
   background-color: #4e4376; }
 
-/* From Autocomplete Geonames*/
-#cityBoxElement {
-  border: 1px solid #f0d43a;
-  visibility: hidden;
-  text-align: left;
-  white-space: nowrap;
-  background-color: #f0d43a; }
-
-.citySuggested {
-  font-size: 0.75em;
-  background-color: #f0d43a; }
-
-.cityBoxMouseOver {
-  font-size: 0.75em;
-  background: #f0d43a;
-  color: white; }
-
 #weather-info, #code-city, #dateSpan {
   display: flex;
   flex-direction: row;
@@ -130,18 +113,22 @@ input:read-only {
   min-width: 0; }
 
 #days-weather {
-  height: 2em;
-  width: 2em;
+  border: 1px solid #2b5876;
+  height: 1em;
+  width: 1em;
   display: flex;
   flex-direction: row;
   justify-content: center;
   position: relative;
-  padding: 4em; }
+  padding: 2em; }
   #days-weather img {
+    object-fit: cover;
     position: absolute;
+    top: 0;
     max-width: 100%; }
   #days-weather p {
     position: absolute;
+    text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -149,31 +136,3 @@ input:read-only {
 
 .date {
   min-width: 0; }
-
-/*the container must be positioned relative:*/
-.autocomplete {
-  position: relative;
-  display: inline-block; }
-
-.autocomplete-items {
-  position: absolute;
-  border: 1px solid #2b5876;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0; }
-  .autocomplete-items div {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #2b5876;
-    border-bottom: 1px solid #2b5876; }
-    .autocomplete-items div :hover {
-      background-color: #2b5876; }
-
-/*when navigating through the items using the arrow keys:*/
-.autocomplete-active {
-  background-color: #2b5876;
-  color: #ffffff; }

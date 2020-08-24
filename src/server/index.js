@@ -35,10 +35,7 @@ function listening() {
 
 console.log(__dirname)
 
-app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'))
-})
+app.get('/', (req, res) => res.sendFile(path.resolve('src/client/views/index.html')))
 
 //GET Route:
 app.get('/all', sendData);
@@ -54,7 +51,7 @@ function addData(req, res){
 }
 
 // https://api.weatherbit.io/v2.0/forecast/daily?&lat=38.123&lon=-78.543&key=API_KEY
-app.post('/weather', async function(req, res){
+app.post('/weather', (req, res) => {
 	const request = await fetch (`https://api.weatherbit.io/v2.0/forecast/daily?&lat=${req.body.lat}&lon=${req.body.long}&key=${process.env.WEATHER_API}`);
 	try {
 			const receivedData = await request.json();
@@ -64,9 +61,8 @@ app.post('/weather', async function(req, res){
 		}
 })
 
-//https://pixabay.com/api/?key=4947176-b25b60930efebf0f10d1c0318&q=Freiburg+Germany&image_type=photo
 //https://pixabay.com/api/?key=API_KEY&q=Boston&image_type=photo
-app.post('/pix', async function (req, res){
+app.post('/pix', (req, res) => {
 	
 	const request = await fetch (`https://pixabay.com/api/?key=${process.env.PIX_API}&q=${req.body.city}+${req.body.country}&image_type=photo`);
 	try {

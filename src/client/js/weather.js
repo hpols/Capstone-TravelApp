@@ -11,18 +11,17 @@ function getWeather() {
 	event.preventDefault;
 	
 	if (Client.dayValue > 16) {
-		weatherInfo.innerHTML = "It's too early. The weather Gods haven't decided yet."
+		weatherInfo.innerHTML = "It's too early to offer you the weather forecast. Starting two weeks before your departure, we will be able to give you an overview."
 	} else {
 		
 		callWeather('http://localhost:8000/weather', {
 			lat: Client.lat,
 			long: Client.long
 		})
-		.then(function(res){
+		.then(res => {
 			console.log(res);
-			let weatherToDisplay = res.data.filter(function(e){
-				return Date.parse(e.valid_date) >= Date.parse(Client.dateInput);
-			});
+			
+			let weatherToDisplay = res.data.filter(e => Date.parse(e.valid_date) >= Date.parse(Client.dateInput) && Date.parse(e.valid_date) <= Date.parse(Client.returnInput));
 			
 			console.log(weatherToDisplay);
 			document.getElementById('weather-header').innerHTML = `Here is the available weather forecast for your stay`;

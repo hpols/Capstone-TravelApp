@@ -43,5 +43,5 @@ function updateTravelInfo() {
 export {
 	updateTravelInfo,
 	dayValue,
-	dateInput
+	dateInput, returnInput
 }
