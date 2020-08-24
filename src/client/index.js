@@ -3,7 +3,8 @@ import { autocomplete,
 		geoInput,
 		countryLookup,
 		postalCodeLookup, 
-		lat, long, ctry, city} from './js/geo.js'
+		lat, long, ctry, city,
+	   retrieveData} from './js/geo.js'
 
 import { updateTravelInfo,
 	   dayValue,
@@ -21,6 +22,7 @@ export {
 	countryLookup,
 	postalCodeLookup, 
 	lat, long, ctry, city,
+	retrieveData,
 	
 	updateTravelInfo,
 	dayValue,

@@ -4,14 +4,9 @@
 // postalcodes is filled by the JSON callback and used by the mouse event handlers of the suggest box
 let postalcodes;
 const placeInput = document.getElementById("placeInput"); 
-const suggestionBox = document.getElementById('cityBoxElement');
-const countrySelectors = document.getElementById("countryInput");
-let postalCodeList;
+const countryInput = document.getElementById("countryInput");
 
-let countriesFromGeo;
-let selectedCountry;
 let lat, long, ctry, city; //to export data to other js files etc.
-let inFocus; //for selectors
 
 
 // –––– HELPER FUNCTIONS –––– //
@@ -23,19 +18,15 @@ function setLongLat(postalcodeData) {
 
 //see: https://stackoverflow.com/a/32205204/7601437
 function getDataId(inputId, datalistId) {
-	let dataID; 
 	let val = document.getElementById(inputId).value;
     let opts = document.getElementById(datalistId).childNodes;
     for (const opt of opts) {
       if (opt.value === val) {
-		  dataID = opt.getAttribute("data-id");
-        break;
+		  return opt.getAttribute("data-id");
+          break;
       }
     }
-	
-	return dataID;
 }
-
 
 //ASYNC get from API
 const retrieveData = async (url= ' ') => {
@@ -65,44 +56,40 @@ function countryLookup() {
 // On leaving the postal code input field this function retrieves an array of places from geonames.org JSON
 // for the given postal code 
 function postalCodeLookup() {
-  let postalcode = document.getElementById("postalcodeInput").value;
-	selectedCountry = getDataId('countryInput', 'countries');
-	ctry = countrySelectors.value;
+	let postalcode = document.getElementById("postalcodeInput").value;
+	let selectedCountry = getDataId('countryInput', 'countries');
+	ctry = countryInput.value;
 
 	//example: http://api.geonames.org/postalCodeLookupJSON?postalcode=6600&country=AT&username=demo
-  let request = `http://api.geonames.org/postalCodeLookupJSON?postalcode=${postalcode}&country=${selectedCountry}&username=atschpe`;
+	let request = `http://api.geonames.org/postalCodeLookupJSON?postalcode=${postalcode}&country=${selectedCountry}&username=atschpe`;
 
 	retrieveData(request)
 	.then(receivedData => {
-  if (receivedData == null) {
-    return;// There was a problem parsing search results
-  }
-			
-  // save place array in 'postalcodes' to make it accessible from mouse event handlers
-  postalcodes = receivedData.postalcodes;
+		if (receivedData == null) {
+			return;// There was a problem parsing search results
+		}
+		postalcodes = receivedData.postalcodes;// save array of 'postalcodes'
 		
 		let placeList = document.getElementById("places");
-  if (postalcodes.length > 1) {
-	  postalCodeList = postalcodes.map((item, index) => {
-		  placeList.innerHTML += `<option value="${item.placeName}" data-id="${index}"></option>`;
-	  })
-  } else {
-    if (postalcodes.length == 1) {
-      // The postalcode only refers to one place so directly fill the form 
-      placeInput.value = postalcodes[0].placeName;
-		city = placeInput.value;
-		setLongLat(postalcodes[0]);
-		Client.getPix();
-    } 
-  }
+		if (postalcodes.length > 1) {
+			let postalCodeList = postalcodes.map((item, index) => {
+				placeList.innerHTML += `<option value="${item.placeName}" data-id="${index}"></option>`;
+			})
+		} else {
+			if (postalcodes.length == 1) {
+				placeInput.value = postalcodes[0].placeName;// The postalcode only refers to one place pop it into the input 
+				city = placeInput.value;
+				setLongLat(postalcodes[0]);
+				Client.getPix();
+			} 
+	  	}
 	});
 }
 
 function geoInput() {
-	
 	setLongLat(postalcodes[getDataId('placeInput', 'places')]);
 	city = placeInput.value;
-	ctry = countrySelectors.value;
+	ctry = countryInput.value;
 	Client.getPix();
 }
 
@@ -110,5 +97,6 @@ export {
 	geoInput,
 	countryLookup,
 	postalCodeLookup,
-	lat, long, ctry, city
+	lat, long, ctry, city,
+	retrieveData
 }

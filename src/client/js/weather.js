@@ -1,5 +1,3 @@
-// JavaScript Document
-let weatherInfo = document.getElementById('weather-info');
 
 function convertDate(weatherData) {
 	let jsonDate  = new Date(weatherData.valid_date);
@@ -10,8 +8,10 @@ function convertDate(weatherData) {
 function getWeather() {
 	event.preventDefault;
 	
+	let weatherInfo = document.getElementById('weather-info');
+	
 	if (Client.dayValue > 16) {
-		weatherInfo.innerHTML = "It's too early to offer you the weather forecast. Starting two weeks before your departure, we will be able to give you an overview."
+		weatherInfo.innerHTML = "It's too early for the weather forecast. Starting two weeks before your departure, we will be able to give you an overview."
 	} else {
 		
 		callWeather('http://localhost:8000/weather', {

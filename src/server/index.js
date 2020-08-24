@@ -3,7 +3,8 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const fetch = require('node-fetch');
-const path = require('path')
+const path = require('path');
+
 
 // Require Express to run server and routes
 const express = require('express');
