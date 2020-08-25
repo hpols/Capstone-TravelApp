@@ -1,4 +1,3 @@
-// JavaScript Document
 function getPix() {
 	
 	requestPix('http://localhost:8000/pix', {

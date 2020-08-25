@@ -133,7 +133,7 @@ img {
   #app {
     display: grid;
     grid-template-columns: auto 1fr auto;
-    grid-auto-rows: minmax(100px, auto);
+    grid-auto-rows: auto 1fr auto;
     height: 100vh;
     grid-gap: 1em;
     grid-template-areas: "hd hd hd hd hd hd hd hd" "ri ri ri ri ri ri ri ri" "le le le le le le le le" "ft ft ft ft ft ft ft ft"; } }

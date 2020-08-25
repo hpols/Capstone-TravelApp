@@ -30,6 +30,7 @@ function updateTravelInfo() {
 	returnValue = Math.floor(timeDuration / dayFactor);
 
 	const counter = document.getElementById('counter');
+	counter.innerHTML = ""; //remove entries, incase it has already been called
 	counter.innerHTML += `${dayValue} more days then you're off to enjoy your ${returnValue}-day stay.`
 	
 	Client.getWeather();

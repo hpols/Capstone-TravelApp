@@ -157,12 +157,12 @@ img{
 	#app {
 		display:grid;
 		grid-template-columns: auto 1fr auto;
-		grid-auto-rows: minmax(100px, auto);
+		grid-auto-rows: auto 1fr auto; //minmax pushes results-div up under weather-div if used!
 		height: 100vh;
 		grid-gap: 1em;
 		grid-template-areas: 
 			"hd hd hd hd hd hd hd hd"
-			"ri ri ri ri ri ri ri ri" /*le = left; ri = right */
+			"ri ri ri ri ri ri ri ri" //le = left; ri = right
 			"le le le le le le le le"
 			"ft ft ft ft ft ft ft ft";
 	}
@@ -171,13 +171,13 @@ img{
 @media(min-width:801px){
 	#app{
 	display: grid;
-	grid-auto-rows: auto 1fr auto;
+	grid-auto-rows: auto 1fr auto; 
 	grid-template-columns: repeat(8, 1fr);
 	height: 100vh;
 	grid-gap: 1em;
 	grid-template-areas: 
 			"hd hd hd hd hd hd hd hd"
-			"le le le le ri ri ri ri" /*le = left; ri = right */
+			"le le le le ri ri ri ri" //le = left; ri = right
 			"ft ft ft ft ft ft ft ft";
 	
 	}

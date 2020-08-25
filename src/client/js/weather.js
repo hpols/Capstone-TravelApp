@@ -9,6 +9,7 @@ function getWeather() {
 	event.preventDefault;
 	
 	let weatherInfo = document.getElementById('weather-info');
+	weatherInfo.innerHTML = ""; //clear previous entries in case there already was a call.
 	
 	if (Client.dayValue > 16) {
 		weatherInfo.innerHTML = "It's too early for the weather forecast. Starting two weeks before your departure, we will be able to give you an overview."
