@@ -1,10 +1,16 @@
-# Weather-Journal App Project
+# Travel App Project
 
 ## Overview
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
+This project is the capstone for the Udacity Front-End Developer nanodegree. It is an asynchronous web app that uses Web APIs to dynamically update the UI based on user input. 
 
-## Instructions
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
+## APIs used
+* Geonames to get info on the destination
+* Weatherbit to get weather info on the destination within the travel time
+* Pixabay for displaying an image of the destination
 
 ## Extras
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+As per the project rubric we have to implement some extras. I have included:
+
+* Add end date and display length of trip.
+* Instead of just pulling a single day forecast, pull the forecast for multiple days.
+* Incorporate icons into forecast.
