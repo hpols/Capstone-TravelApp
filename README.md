@@ -16,7 +16,7 @@ As per the project rubric we have to implement some extras. I have included:
 * Incorporate icons into forecast.
 
 ## Running the Code
-Download this repo (through git commands or directly as a zip) and navigate into the downloaded folder in your terminal.
-
+* You will need to acquire an API-Key for Weatherbit and Pixaby. Store these in an `.env`file as `WEATHER_API=$yourKey`and `PIX_API=$yourKey` respectively.
+* Download this repo (through git commands or directly as a zip) and navigate into the downloaded folder in your terminal.
 * To run in development mode: call `npm run dev` from your terminal. Your browser will open to the localhost used.
 * to run in production mode: call `npm run build` followed by `npm run start` from your terminal. Now you can start using the app in your browser.
