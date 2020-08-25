@@ -31,12 +31,11 @@
 					<div id="arrow">&#8594;</div>
 					<input type="date" id="travelreturn" placeholder="yyyy-mm-dd" onblur="Client.updateTravelInfo();" class="date">
 					<!--placeholder shows in browsers that do not support the date-picker -->
-					</div>
+				</div>
 			</form>
 			<div id="weather">
 				<div id="weather-header"> </div>
-				<div id="weather-info">
-				</div>
+				<div id="weather-info"> </div>
 			</div>
 		</div>
 		<div id="results">
@@ -44,9 +43,18 @@
 			<div id="pix-image"></div>
 		</div>
 
-	<footer id="footer">
-	<div>With thanks to <a href="http://www.geonames.org">GeoNames</a>, <a href="https://www.weatherbit.io">WeatherBit</a> and <a href="https://pixabay.com">Pixabay</a></div>
-	</footer>
-</div>
+		<footer id="footer">
+			<div>With thanks to <a href="http://www.geonames.org">GeoNames</a>, <a href="https://www.weatherbit.io">WeatherBit</a> and <a href="https://pixabay.com">Pixabay</a></div>
+		</footer>
+	</div>
+	<script>
+		// Check that service workers are supported
+	 	if ('serviceWorker' in navigator) {
+			// Use the window load event to keep the page load performant
+			window.addEventListener('load', () => {
+			 navigator.serviceWorker.register('/service-worker.js');
+		 });
+	 }
+	</script>
 	</body>
 </html>
