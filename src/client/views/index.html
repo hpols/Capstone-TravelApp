@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Travel App</title>
 	<link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
 </head>
@@ -29,15 +30,15 @@
 				<div id="dateSpan">
 					<input type="date" id="traveldate" placeholder="yyyy-mm-dd" class="date">
 					<div id="arrow">&#8594;</div>
-					<input type="date" id="travelreturn" placeholder="yyyy-mm-dd" onblur="Client.updateTravelInfo();" class="date">
+					<input type="date" id="travelreturn" placeholder="yyyy-mm-dd" class="date">
 					<!--placeholder shows in browsers that do not support the date-picker -->
 				</div>
 			</form>
-			<div id="weather">
+		</div>
+		<div id="weather">
 				<div id="weather-header"> </div>
 				<div id="weather-info"> </div>
 			</div>
-		</div>
 		<div id="results">
 			<div id="counter"></div> 
 			<div id="pix-image"></div>

@@ -6,8 +6,7 @@ import { autocomplete,
 		lat, long, ctry, city,
 	   retrieveData} from './js/geo.js'
 
-import { updateTravelInfo,
-	   dayValue,
+import { dayValue,
 	   dateInput, returnInput} from './js/app.js'
 
 import {getWeather} from './js/weather.js'
@@ -24,7 +23,6 @@ export {
 	lat, long, ctry, city,
 	retrieveData,
 	
-	updateTravelInfo,
 	dayValue,
 	dateInput, returnInput,
 	

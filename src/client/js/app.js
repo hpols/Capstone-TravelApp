@@ -5,9 +5,9 @@ const hourFactor = (minFactor * 60);
 const dayFactor = (hourFactor * 24);
 
 let dateInput, returnInput;
-let dayValue, returnValue;
+let dayValue, returnValue;	
 
-function updateTravelInfo() {
+document.getElementById('travelreturn').addEventListener('focusout', function(){
 	dateInput = document.getElementById('traveldate').value;
 	returnInput = document.getElementById('travelreturn').value;
 	
@@ -34,10 +34,9 @@ function updateTravelInfo() {
 	counter.innerHTML += `${dayValue} more days then you're off to enjoy your ${returnValue}-day stay.`
 	
 	Client.getWeather();
-}		
+})
 
 export {
-	updateTravelInfo,
 	dayValue,
 	dateInput, returnInput
 }

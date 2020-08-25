@@ -38,6 +38,12 @@ header, footer {
 	height:100%;
 }
 
+#weather {
+	grid-area: we;
+	padding: 1em;
+	height:100%;
+}
+
 #footer {
 	grid-area: ft;
 	height:100%;
@@ -153,7 +159,7 @@ img{
 	text-align: center;
 }
 
-@media(max-width:800px){
+@media(max-width:600px){
 	#app {
 		display:grid;
 		grid-template-columns: auto 1fr auto;
@@ -163,12 +169,13 @@ img{
 		grid-template-areas: 
 			"hd hd hd hd hd hd hd hd"
 			"ri ri ri ri ri ri ri ri" //le = left; ri = right
+			"we we we we we we we we" //we = weather;
 			"le le le le le le le le"
 			"ft ft ft ft ft ft ft ft";
 	}
 }
 
-@media(min-width:801px){
+@media(min-width:601px){
 	#app{
 	display: grid;
 	grid-auto-rows: auto 1fr auto; 
@@ -178,6 +185,7 @@ img{
 	grid-template-areas: 
 			"hd hd hd hd hd hd hd hd"
 			"le le le le ri ri ri ri" //le = left; ri = right
+			"we we we we we we we we" //we = weather;
 			"ft ft ft ft ft ft ft ft";
 	
 	}
