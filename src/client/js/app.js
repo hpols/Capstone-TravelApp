@@ -7,7 +7,7 @@ const dayFactor = (hourFactor * 24);
 let dateInput, returnInput;
 let dayValue, returnValue;	
 
-document.getElementById('travelreturn').addEventListener('focusout', function(){
+document.getElementById('travelreturn').addEventListener('focusout', () => {
 	dateInput = document.getElementById('traveldate').value;
 	returnInput = document.getElementById('travelreturn').value;
 	
