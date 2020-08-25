@@ -14,3 +14,9 @@ As per the project rubric we have to implement some extras. I have included:
 * Add end date and display length of trip.
 * Instead of just pulling a single day forecast, pull the forecast for multiple days.
 * Incorporate icons into forecast.
+
+## Running the Code
+Download this repo (through git commands or directly as a zip) and navigate into the downloaded folder in your terminal.
+
+* To run in development mode: call `npm run dev` from your terminal. Your browser will open to the localhost used.
+* to run in production mode: call `npm run build` followed by `npm run start` from your terminal. Now you can start using the app in your browser.
