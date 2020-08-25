@@ -1,0 +1,160 @@
+html {
+  height: 100%; }
+
+body {
+  font-size: 1em;
+  font-family: 'Oswald', sans-serif;
+  color: #f0d43a;
+  height: 100%;
+  background-image: -webkit-linear-gradient(340deg, #2b5876 0%, #4e4376 100%);
+  background-image: -moz-linear-gradient(340deg, #2b5876 0%, #4e4376 100%);
+  background-image: -o-linear-gradient(340deg, #2b5876 0%, #4e4376 100%);
+  background-image: linear-gradient(340deg, #2b5876 0%, #4e4376 100%); }
+
+header, footer {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1em;
+  height: 3em; }
+
+#header {
+  grid-area: hd;
+  height: 100%; }
+
+#details {
+  grid-area: ri;
+  padding: 1em;
+  height: 100%; }
+
+#results {
+  grid-area: le;
+  padding: 1em;
+  height: 100%; }
+
+#weather {
+  grid-area: we;
+  padding: 1em;
+  height: 100%; }
+
+#footer {
+  grid-area: ft;
+  height: 100%; }
+
+/*  Basic Styling To Override Default For Basic HTML Elements */
+input {
+  background: none;
+  color: #f0d43a;
+  font-size: 1em;
+  font-family: 'Oswald', sans-serif;
+  border: 1 inset #2b5876;
+  margin: 1em; }
+  input:hover {
+    font-style: italic; }
+  input:-moz-read-only {
+    /* For Firefox */
+    background-color: #4e4376; }
+  input:read-only {
+    background-color: #4e4376; }
+
+#arrow {
+  margin: 1em 0;
+  color: #f0d43a; }
+
+button {
+  width: 400px;
+  height: 100px;
+  background: #2b5876;
+  color: #f0d43a;
+  font-size: 1.25em;
+  font-family: 'Oswald', sans-serif;
+  border: none;
+  box-shadow: 2px 4px 5px #2b5876; }
+
+a {
+  color: antiquewhite;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+
+img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover; }
+
+/* Reset style for HTML element on active to have no border*/
+:focus {
+  outline: none; }
+
+/* Style for Placeholder Text*/
+::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: #f0d43a; }
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #f0d43a; }
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #f0d43a; }
+
+#weather-info, #code-city, #dateSpan {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: white;
+  font-weight: 400;
+  min-width: 0; }
+
+#days-weather {
+  border: 1px solid #2b5876;
+  height: 1em;
+  width: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  padding: 2em; }
+  #days-weather img {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    max-width: 100%; }
+  #days-weather p {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 2px 2px 5px black; }
+
+.date {
+  min-width: 0; }
+
+#counter {
+  text-align: center; }
+
+@media (max-width: 600px) {
+  #app {
+    display: grid;
+    grid-auto-rows: auto 1fr auto;
+    grid-template-columns: repeat(8, 1fr);
+    height: 100vh;
+    grid-gap: 1em;
+    grid-template-areas: "hd hd hd hd hd hd hd hd" "ri ri ri ri ri ri ri ri" "we we we we we we we we" "le le le le le le le le" "ft ft ft ft ft ft ft ft"; } }
+@media (min-width: 601px) and (max-width: 800px) {
+  #app {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-auto-rows: auto 1fr auto;
+    height: 100vh;
+    grid-gap: 1em;
+    grid-template-areas: "hd hd hd hd hd hd hd hd" "le le le le ri ri ri ri" "we we we we we we we we" "ft ft ft ft ft ft ft ft"; } }
+@media (min-width: 801px) {
+  #app {
+    display: grid;
+    grid-auto-rows: auto 1fr auto;
+    grid-template-columns: repeat(8, 1fr);
+    height: 100vh;
+    grid-gap: 1em;
+    grid-template-areas: "hd hd hd hd hd hd hd hd" "le le le le ri ri ri ri" "le le le le we we we we" "ft ft ft ft ft ft ft ft"; } }

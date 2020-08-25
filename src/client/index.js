@@ -18,9 +18,9 @@ import './styles/style.scss'
 
 document.addEventListener('DOMContentLoaded', () => {
 	countryLookup();
-	document.getElementById('postalcodeInput').addEventListener('onBlur', postalCodeLookup());
-	document.getElementById('placeInput').addEventListener('onBlur', geoInput());
-	document.getElementById('travelreturn').addEventListener('focusout', getDates());
+	document.getElementById('postalcodeInput').addEventListener('onBlur', postalCodeLookup);
+	document.getElementById('placeInput').addEventListener('onBlur', geoInput);
+	document.getElementById('travelreturn').addEventListener('focusout', getDates);
  });
 
 //exports
