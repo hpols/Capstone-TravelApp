@@ -5,7 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
@@ -37,6 +38,10 @@ module.exports = {
   		minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
 	},
     plugins: [
+		new CleanWebpackPlugin({
+            // Simulate the removal of files
+            dry: false
+        }),
 		new CopyWebpackPlugin({
 			patterns: [{ from: './src/client/media', 
 						to: 'media'}]

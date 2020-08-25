@@ -7,7 +7,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
 </head>
 	
-<body onLoad="Client.countryLookup()">
+<body>
 	<div id="app">
 		<header id="header">
 			<h1>Travel App</h1>
@@ -21,7 +21,7 @@
 				<div id="code-city">
 					<input id="postalcodeInput" name="postalcode" onblur="Client.postalCodeLookup()" type="text" placeholder="postal code">
 					<div id="city">
-						<input id="placeInput" name="place" list="places" placeholder="place" oninput="Client.geoInput();">
+						<input id="placeInput" name="place" list="places" placeholder="place" >
 						<datalist id="places"></datalist>
 						<!--<div style="visibility: hidden;" id="cityBoxElement">Will auto populate </div>-->
 					</div>

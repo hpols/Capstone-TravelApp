@@ -6,11 +6,11 @@ const dayFactor = (hourFactor * 24);
 
 let dateInput, returnInput;
 let dayValue, returnValue;	
-
-document.getElementById('travelreturn').addEventListener('focusout', () => {
+	
+function getDates() {
 	dateInput = document.getElementById('traveldate').value;
 	returnInput = document.getElementById('travelreturn').value;
-	
+
 	let travelDate, travelReturn;
 
 	console.log("dateInput: " + dateInput)
@@ -20,7 +20,7 @@ document.getElementById('travelreturn').addEventListener('focusout', () => {
 	if (returnInput != "" && returnInput != "yyyy-mm-dd") {
 		travelReturn = new Date(returnInput).getTime();
 	}
-	
+
 	let now = new Date().getTime();// Capture current time
 	let timeLeft = travelDate - now; //how much time is left before the travel date?
 	let timeDuration = travelReturn - travelDate;
@@ -32,11 +32,12 @@ document.getElementById('travelreturn').addEventListener('focusout', () => {
 	const counter = document.getElementById('counter');
 	counter.innerHTML = ""; //remove entries, incase it has already been called
 	counter.innerHTML += `${dayValue} more days then you're off to enjoy your ${returnValue}-day stay.`
-	
-	Client.getWeather();
-})
+
+	Client.getWeather();	
+}
 
 export {
+	getDates,
 	dayValue,
 	dateInput, returnInput
 }
