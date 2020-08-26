@@ -18,8 +18,8 @@ import './styles/style.scss'
 
 document.addEventListener('DOMContentLoaded', () => {
 	countryLookup();
-	document.getElementById('postalcodeInput').addEventListener('onBlur', postalCodeLookup);
-	document.getElementById('placeInput').addEventListener('onBlur', geoInput);
+	document.getElementById('postalcodeInput').addEventListener('blur', postalCodeLookup);
+	document.getElementById('placeInput').addEventListener('blur', geoInput);
 	document.getElementById('travelreturn').addEventListener('focusout', getDates);
  });
 
